@@ -43,7 +43,8 @@ public class BankAccountDemo {
 
             }else if (answer.equals("no")) {
                     //Get existed user info
-                    new BankAccountDemo(100);
+                    ///Assuming all exsited user have $500 balance 
+                    new BankAccountDemo(500);
 
                     //Make any deposit or withdraw today?
                     System.out.println("What can I help you for today? ");
