@@ -16,8 +16,8 @@ import java.util.Scanner;
 
 public class FileReaderDemo {
 
-    public static int THREADSHOLD_FREQ=5;
-    public static int THREADSHOLD_LEN =3;
+    private final static int THREADSHOLD_FREQ=5;
+    private final static int THREADSHOLD_LEN =3;
 
 
     public static void main(String[] args) throws IOException {
