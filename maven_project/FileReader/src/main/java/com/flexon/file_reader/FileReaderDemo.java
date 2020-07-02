@@ -16,33 +16,37 @@ import java.util.Scanner;
 
 public class FileReaderDemo {
 
-    public static int threadshold_freq=5;
-    public static int threadshold_len=3;
+    public static int THREADSHOLD_FREQ=5;
+    public static int THREADSHOLD_LEN =3;
 
 
     public static void main(String[] args) throws IOException {
         //Read user input file
         FileReaderDemo fileDemo = new FileReaderDemo();
-        FileReader fileReader = new FileReader("src/com/flexon/file_reader/file.txt");
+        File file = new File("file.txt");
+
+        //System.out.println(file.getAbsoluteFile());
+
         //store strings in Arraylist
-        ArrayList<String> line = new ArrayList<>();
+        ArrayList<String> rwords = new ArrayList<>();
         Map<String, Integer> counts = new HashMap<>();
 
         //execute all method
-        fileDemo.count(fileReader, counts);
-        fileDemo.select(line,counts);
-        fileDemo.printResult(line);
+        fileDemo.count(file, counts);
+        fileDemo.select(rwords, counts);
+        fileDemo.printResult(rwords);
+
     }
 
-    private void count(FileReader fileReader, Map<String, Integer> counts) {
+    private void count(File file, Map<String, Integer> counts) throws FileNotFoundException {
             try {
-                Scanner scanner = new Scanner(fileReader);
+                Scanner scanner = new Scanner(file);
                 while(scanner.hasNextLine()){
                     String lines = scanner.nextLine();
                     //System.out.println(lines);
                     String [] s = lines.split("[ ,.]");
                     for(String a : s ){
-                        //  if(a.equals(""))continue;
+//                        if(a.equals(""))continue;
                         counts.put(a, counts.getOrDefault(a,0)+1);
                         // System.out.println(a+" "+counts.get(a));
                     }
@@ -55,15 +59,15 @@ public class FileReaderDemo {
 
     }
 
-    private void select(ArrayList<String> line, Map<String, Integer> counts ) {
+    private void select(ArrayList<String> rwords, Map<String, Integer> counts ) {
         for (String key : counts.keySet()) {
-            if (counts.get(key) > threadshold_freq) {
-                if (key.length() > threadshold_len) {
+            if (counts.get(key) > THREADSHOLD_FREQ) {
+                if (key.length() > THREADSHOLD_LEN) {
                     StringBuilder reverseWord = new StringBuilder();
                     reverseWord.append(key);
                     reverseWord = reverseWord.reverse();
                     // System.out.println(reverseWord.toString());
-                    line.add(reverseWord.toString());
+                    rwords.add(reverseWord.toString());
                 }
 
             }
@@ -71,8 +75,8 @@ public class FileReaderDemo {
     }
 
 
-    private void printResult(ArrayList<String> line) {
-         for (String word : line){
+    private void printResult(ArrayList<String> rwords) {
+         for (String word : rwords){
               System.out.println(word);
          }
     }
