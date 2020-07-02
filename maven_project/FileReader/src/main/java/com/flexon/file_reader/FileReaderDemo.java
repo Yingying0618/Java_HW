@@ -6,14 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-//1. Write a program to read a file from a location
-// 2. Find all the words that appeared more than 5 times
-// and are more than 3 characters in length.
-// 3. Populate a arraylist with all those words after reversing the words
-// 4. Iterate the arraylist and print.
-
-
-
 public class FileReaderDemo {
 
     private final static int THREADSHOLD_FREQ=5;
@@ -24,8 +16,6 @@ public class FileReaderDemo {
         //Read user input file
         FileReaderDemo fileDemo = new FileReaderDemo();
         File file = new File("file.txt");
-
-        //System.out.println(file.getAbsoluteFile());
 
         //store strings in Arraylist
         ArrayList<String> rwords = new ArrayList<>();
@@ -43,12 +33,9 @@ public class FileReaderDemo {
                 Scanner scanner = new Scanner(file);
                 while(scanner.hasNextLine()){
                     String lines = scanner.nextLine();
-                    //System.out.println(lines);
                     String [] s = lines.split("[ ,.]");
                     for(String a : s ){
-//                        if(a.equals(""))continue;
                         counts.put(a, counts.getOrDefault(a,0)+1);
-                        // System.out.println(a+" "+counts.get(a));
                     }
                 }
                 scanner.close();
@@ -56,7 +43,6 @@ public class FileReaderDemo {
                 System.out.println("File is missing");
                 throw e;
             }
-
     }
 
     private void select(ArrayList<String> rwords, Map<String, Integer> counts ) {
@@ -66,7 +52,6 @@ public class FileReaderDemo {
                     StringBuilder reverseWord = new StringBuilder();
                     reverseWord.append(key);
                     reverseWord = reverseWord.reverse();
-                    // System.out.println(reverseWord.toString());
                     rwords.add(reverseWord.toString());
                 }
 
@@ -80,7 +65,4 @@ public class FileReaderDemo {
               System.out.println(word);
          }
     }
-
-
-
 }
