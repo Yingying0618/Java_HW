@@ -101,7 +101,7 @@ public class BankAccountDemo {
             }
         }
     }
-    protected static void exit(String exit){
+    protected void exit(String exit){
         System.out.println("Thank you for using our saving account!");
         System.out.println("You have "+ exit + "ed our system, see you next time!");
     }
