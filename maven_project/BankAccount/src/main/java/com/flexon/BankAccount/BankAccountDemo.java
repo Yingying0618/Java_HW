@@ -3,27 +3,22 @@ package com.flexon.BankAccount;
 import java.util.Scanner;
 
 public class BankAccountDemo {
-    private static Scanner scanner;
-    private static String answer;
-    private static BankAccount account1;
 
     public static void main(String[] args) {
         //Set a scanner
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         //Initiate a new bank account with balance = 0
-        account1 = new BankAccount();
+        BankAccount account1 = new BankAccount();
         System.out.println("Welcome!");
         System.out.println("Are you a new user with us?");
         System.out.println("Please enter \"yes\", \"no\", or \"exit\" " );
         while(true) {
-            answer = scanner.next();
+            String answer = scanner.next();
             if (answer.equals("yes")) {
                 BankAccountDemo demo=new BankAccountDemo();
-                demo.createAccount(0);
+                demo.createAccount(0, account1);
                 System.out.println("\nwhat else can I help you today?");
-
-                System.out.println("You can enter: \"deposit\", \"withdraw\", \"show\",\"exit\" ");
-                select();
+                select(account1, scanner);
 
                 break;
 
@@ -31,12 +26,11 @@ public class BankAccountDemo {
                     //Get existed user info
                     //Assuming all existed use have $500 in balance
                     BankAccountDemo demo=new BankAccountDemo();
-                    demo.createAccount(500);
+                    demo.createAccount(500, account1);
 
                     //Make any deposit or withdraw today?
                     System.out.println("What can I help you for today? ");
-                    System.out.println("Please enter: \"deposit\", \"withdraw\",\"show\", \"exit\"");
-                    select();
+                    select(account1, scanner);
                     break;
 
             } else if (answer.equals("exit")) {
@@ -50,43 +44,45 @@ public class BankAccountDemo {
         }
 
     }
-    protected void createAccount(int balance) {
+    protected void createAccount(int balance, BankAccount account) {
         //Create a scanner
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         //set bank account info
 
         //Set up customer name
         System.out.println("Please enter your name: ");
-        account1.setCustomerName(scanner.nextLine());
+        account.setCustomerName(scanner.nextLine());
         //Set up customer accountNumber
         System.out.println("Please enter your 4-digits account number: ");
-        account1.setAccountNumber(scanner.nextLine());
+        account.setAccountNumber(scanner.nextLine());
 
         //Set up customer email
         System.out.println("Please enter your email: ");
-        account1.setEmail(scanner.nextLine());
+        account.setEmail(scanner.nextLine());
 
         //Set up customer phone number
         System.out.println("Please enter your 9-digits phone number: ");
-        account1.setPhone(scanner.nextLine());
+        account.setPhone(scanner.nextLine());
 
         //Initiate account balance
-        account1.setBalance(balance);
+        account.setBalance(balance);
 
         //Print all account information
-        account1.printinfo();
+        account.printinfo();
     }
 
-    protected static void select(){
+    protected static void select(BankAccount account, Scanner scanner){
+        String answer = "answer";
+
         while (!answer.equals("exit")) {
             answer = scanner.nextLine();
             if (answer.equals("deposit")) {
                 System.out.println("Enter the number you want to add: ");
-                account1.add(scanner.nextInt());
+                account.add(scanner.nextInt());
                 //break;
             } else if (answer.equals("withdraw")) {
                 System.out.println("Enter the number you want to withdraw: ");
-                account1.deduct(scanner.nextInt());
+                account.deduct(scanner.nextInt());
                 //break;
             } else if (answer.equals("exit")) {
                 BankAccountDemo demo=new BankAccountDemo();
@@ -94,7 +90,7 @@ public class BankAccountDemo {
                 //break;
 
             }else if(answer.equals("show")){
-                account1.printinfo();
+                account.printinfo();
                 //break;
             } else {
                 System.out.println("Please enter: \"deposit\", \"withdraw\",\"show\", \"exit\"");
